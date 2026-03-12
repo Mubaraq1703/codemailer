@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulk Mailer Pro | Smart Email Campaign Wizard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="app-layout">
+            <!-- Sidebar with Activity Log -->
+            <aside class="sidebar">
+                <div class="card log-card" id="logCard">
+                    <h2><i class="fas fa-terminal"></i> Activity Log</h2>
+                    <div class="status-log" id="statusLog"></div>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="main-content">
+                <!-- Header -->
+                <header>
+                    <h1>Bulk Mailer Pro</h1>
+                    <p>Smart AI-powered cold email campaigns in 4 easy steps</p>
+                </header>
+
+                <!-- Progress Bar -->
+                <div class="progress-bar">
+                    <div class="step-item active" id="step-indicator-1">
+                        <div class="step-circle">1</div>
+                        <span>Your Company</span>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="step-item" id="step-indicator-2">
+                        <div class="step-circle">2</div>
+                        <span>Find Recipients</span>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="step-item" id="step-indicator-3">
+                        <div class="step-circle">3</div>
+                        <span>Generate Emails</span>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="step-item" id="step-indicator-4">
+                        <div class="step-circle">4</div>
+                        <span>Review & Send</span>
+                    </div>
+                </div>
+
+                <!-- STEP 1: Sender Profile -->
+                <div class="step-panel active" id="step-1">
+                    <div class="card">
+                        <h2><i class="fas fa-building"></i> Tell us about your company</h2>
+                        <p class="subtitle">We'll research your company online to write compelling emails on your behalf.</p>
+                        <div class="form-group">
+                            <label>Your Company Name <span class="required">*</span></label>
+                            <input type="text" id="companyName" placeholder="e.g. Edu Smart Tech LTD">
+                        </div>
+                        <div class="form-group">
+                            <label>Your Website (Optional)</label>
+                            <input type="text" id="companyWebsite" placeholder="e.g. https://edusmarttech.com">
+                            <small>If you don't have one, we'll search the web for your company.</small>
+                        </div>
+                        <button class="btn" id="buildProfileBtn">
+                            <i class="fas fa-search"></i> Research My Company
+                        </button>
+                        <div id="profileStatus" style="margin-top: 1rem;"></div>
+                    </div>
+
+                    <!-- Profile Result Card -->
+                    <div class="card result-card" id="profileResult" style="display:none;">
+                        <h2><i class="fas fa-check-circle" style="color:var(--success)"></i> Company Profile Found</h2>
+                        <div id="profileContent"></div>
+                        <button class="btn btn-outline" id="editProfileBtn" style="margin-bottom:0.75rem;">
+                            <i class="fas fa-edit"></i> Edit Profile
+                        </button>
+                        <button class="btn" id="proceedToStep2">
+                            Next: Find Recipients <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STEP 2: Discovery -->
+                <div class="step-panel" id="step-2">
+                    <div class="card">
+                        <h2><i class="fas fa-search-location"></i> Find Your Recipients</h2>
+                        <p class="subtitle">Enter any Google search query. Use advanced operators for best results.</p>
+                        
+                        <div class="form-group">
+                            <label>Google Search Query</label>
+                            <div class="search-bar-wrapper">
+                                <i class="fas fa-search search-icon"></i>
+                                <input type="text" id="searchQuery" placeholder='e.g. "secondary school" "principal" Lagos "@gmail.com"'>
+                            </div>
+                        </div>
+
+                        <div class="query-builder">
+                            <p class="example-label">🛠️ Query Builder — auto-fills the search bar as you select:</p>
+                            <div class="builder-grid">
+                                <div class="builder-field">
+                                    <label>Target Type</label>
+                                    <select id="qbTarget">
+                                        <option value="">— Any —</option>
+                                        <optgroup label="Education">
+                                            <option value='"secondary school"'> Secondary School</option>
+                                            <option value='"primary school"'>Primary School</option>
+                                            <option value='"nursery school"'>Nursery School</option>
+                                            <option value='"university"'>University</option>
+                                            <option value='"polytechnic"'>Polytechnic</option>
+                                            <option value='"college of education"'>College of Education</option>
+                                        </optgroup>
+                                        <optgroup label="Organizations">
+                                            <option value='"church" "pastor"'>Church</option>
+                                            <option value='"mosque"'>Mosque</option>
+                                            <option value='"hospital" "director"'>Hospital</option>
+                                            <option value='"clinic"'>Clinic</option>
+                                            <option value='"NGO"'>NGO</option>
+                                            <option value='"company" "CEO"'>Business / Company</option>
+                                            <option value='"hotel" "manager"'>Hotel</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                <div class="builder-field">
+                                    <label>City / Location</label>
+                                    <select id="qbCity">
+                                        <option value="">— Any City —</option>
+                                        <option value="Lagos">Lagos</option>
+                                        <option value="Abuja">Abuja</option>
+                                        <option value="Ibadan">Ibadan</option>
+                                        <option value="Kano">Kano</option>
+                                        <option value="Port Harcourt">Port Harcourt</option>
+                                        <option value="Enugu">Enugu</option>
+                                        <option value="Benin City">Benin City</option>
+                                        <option value="Kaduna">Kaduna</option>
+                                        <option value="Onitsha">Onitsha</option>
+                                        <option value="Aba">Aba</option>
+                                        <option value="Warri">Warri</option>
+                                        <option value="Calabar">Calabar</option>
+                                        <option value="Uyo">Uyo</option>
+                                        <option value="Owerri">Owerri</option>
+                                        <option value="Jos">Jos</option>
+                                        <option value="Abeokuta">Abeokuta</option>
+                                        <option value="Ilorin">Ilorin</option>
+                                        <option value="Maiduguri">Maiduguri</option>
+                                        <option value="Akure">Akure</option>
+                                        <option value="Asaba">Asaba</option>
+                                    </select>
+                                </div>
+                                <div class="builder-field">
+                                    <label>Site / Domain</label>
+                                    <select id="qbDomain">
+                                        <option value="">— Any —</option>
+                                        <option value="site:.ng">Nigeria (.ng)</option>
+                                        <option value="site:.com.ng">Commercial Nigeria (.com.ng)</option>
+                                        <option value="site:.edu.ng">Education Nigeria (.edu.ng)</option>
+                                        <option value="site:.org.ng">NGO Nigeria (.org.ng)</option>
+                                        <option value="site:.com">.com</option>
+                                        <option value="site:.org">.org</option>
+                                        <option value="site:linkedin.com">LinkedIn</option>
+                                        <option value="site:yellowpages.com.ng">Yellow Pages NG</option>
+                                    </select>
+                                </div>
+                                <div class="builder-field">
+                                    <label>Email Type</label>
+                                    <select id="qbEmail">
+                                        <option value="">— Any Email —</option>
+                                        <option value='"@gmail.com"'>Gmail</option>
+                                        <option value='"@yahoo.com"'>Yahoo</option>
+                                        <option value='"@hotmail.com"'>Hotmail</option>
+                                        <option value='"@outlook.com"'>Outlook</option>
+                                        <option value='"@"'>Any @ address</option>
+                                        <option value='-"@gmail.com" -"@yahoo.com"'>Domain Email only</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn" id="searchBtn">
+                            <i class="fas fa-wand-magic-sparkles"></i> Search & Extract Contacts
+                        </button>
+                        <div id="searchStatus" style="margin-top: 1rem;"></div>
+                    </div>
+
+                    <!-- Results -->
+                    <div class="card result-card" id="searchResult" style="display:none;">
+                        <div class="result-header">
+                            <h2><i class="fas fa-users"></i> Recipients Found</h2>
+                            <span id="contactCount" class="count-badge"></span>
+                        </div>
+                        <div class="table-wrapper" id="recipientsTable"></div>
+
+                        <!-- Manual Add Contact -->
+                        <div class="add-contact-form">
+                            <p class="example-label" style="margin-bottom:0.65rem">➕ Add a contact manually:</p>
+                            <div class="add-contact-grid">
+                                <input type="text" id="addName" placeholder="Name / Organization">
+                                <input type="email" id="addEmail" placeholder="Email address *">
+                                <input type="text" id="addTitle" placeholder="Title (optional)">
+                                <button class="btn" id="addContactBtn" style="padding:0.6rem 1rem; width:auto">
+                                    <i class="fas fa-plus"></i> Add
+                                </button>
+                            </div>
+                            <div id="addContactStatus" style="font-size:0.8rem; margin-top:0.4rem;"></div>
+                        </div>
+
+                        <div class="step-actions" style="margin-top:1.25rem">
+                            <button class="btn btn-ghost" id="backToStep1">
+                                <i class="fas fa-arrow-left"></i> Back
+                            </button>
+                            <button class="btn" id="proceedToStep3">
+                                Next: Generate Emails <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 3: Email Generation -->
+                <div class="step-panel" id="step-3">
+                    <div class="card">
+                        <h2><i class="fas fa-robot"></i> AI Email Generation</h2>
+                        <p class="subtitle">Optionally attach a PDF — the AI will read it and reference it in every email.</p>
+
+                        <!-- PDF Upload -->
+                        <div class="pdf-upload-zone" id="pdfUploadZone">
+                            <input type="file" id="pdfFileInput" accept=".pdf" style="display:none">
+                            <div class="pdf-dropbox" id="pdfDropbox" onclick="document.getElementById('pdfFileInput').click()">
+                                <i class="fas fa-file-pdf pdf-icon"></i>
+                                <p>Click to attach a PDF <span style="color:var(--text-muted)">(optional, max 200MB)</span></p>
+                                <small>Company brochure, product catalogue, proposal, etc.</small>
+                            </div>
+                            <div id="pdfStatus" style="margin-top:0.75rem;"></div>
+                            <!-- PDF Summary Preview -->
+                            <div class="pdf-preview" id="pdfPreview" style="display:none;">
+                                <div class="pdf-preview-header">
+                                    <span><i class="fas fa-file-pdf" style="color:#ef4444"></i> <span id="pdfFileName"></span></span>
+                                    <button id="removePdfBtn" class="btn-ghost" style="width:auto; padding:0.3rem 0.75rem; font-size:0.78rem; border-radius:0.5rem; border:1px solid var(--border)">
+                                        <i class="fas fa-trash"></i> Remove
+                                    </button>
+                                </div>
+                                <p class="example-label" style="margin:0.6rem 0 0.3rem">📄 AI understood this document as:</p>
+                                <div id="pdfSummaryText" class="pdf-summary"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top:1.25rem">
+                            <label>Extra Instructions (Optional)</label>
+                            <textarea id="customInstructions" placeholder="e.g. Mention our 20% launch discount. Emphasize our support for Nigerian schools."></textarea>
+                        </div>
+                        <button class="btn" id="generateBtn">
+                            <i class="fas fa-magic"></i> Generate Personalized Emails
+                        </button>
+                        <div id="generateStatus" style="margin-top: 1rem;"></div>
+                    </div>
+                </div>
+
+                <!-- STEP 4: Review & Send -->
+                <div class="step-panel" id="step-4">
+                    <div class="card">
+                        <div class="result-header">
+                            <h2><i class="fas fa-envelope-open-text"></i> Review & Send</h2>
+                            <span id="generatedCount" class="count-badge"></span>
+                        </div>
+                        <p class="subtitle">Each email below has been personalized by AI. Click any row to preview the email.</p>
+                        <div class="table-wrapper" id="emailsTable"></div>
+                        <div class="step-actions" style="margin-top: 1.5rem;">
+                            <button class="btn btn-ghost" id="backToStep3">
+                                <i class="fas fa-arrow-left"></i> Back
+                            </button>
+                            <button class="btn btn-launch" id="sendCampaignBtn">
+                                <i class="fas fa-paper-plane"></i> Launch Campaign
+                            </button>
+                        </div>
+                        <div id="sendStatus" style="margin-top: 1rem;"></div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Email Preview Modal -->
+        <div class="modal-overlay" id="emailModal" style="display:none;">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Email Preview</h3>
+                    <button class="modal-close" id="closeModal"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-meta"><strong>To:</strong> <span id="modalTo"></span></p>
+                    <p class="modal-meta"><strong>Subject:</strong> <span id="modalSubject"></span></p>
+                    <hr style="border-color: var(--border); margin: 1rem 0;">
+                    <div id="modalBody"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Alert Modal -->
+        <div class="modal-overlay" id="alertModal" style="display:none;">
+            <div class="modal" style="max-width:400px; text-align:center;">
+                <div class="modal-body">
+                    <div style="font-size:3rem; color:var(--warning); margin-bottom:1rem;">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <h3 id="alertTitle" style="margin-bottom:0.75rem;">Attention</h3>
+                    <p id="alertMessage" style="color:var(--text-muted); margin-bottom:1.5rem;"></p>
+                    <button class="btn" id="closeAlertBtn">Got it</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
